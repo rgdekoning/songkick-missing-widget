@@ -1,0 +1,76 @@
+html, body {
+    margin: 0;
+    padding: 0;
+    font-family: "Open Sans", sans-serif;
+    font-size: 14px;
+}
+
+.events__container {
+    margin: 0;
+    padding: 10px;
+}
+
+.events__title {
+    font-size: 1.154em;
+    font-weight: 400;
+    padding: 1em 10px 0;
+    min-height: 30px;
+    margin: 0;
+    background-image: url('../img/songkick/by-sk/by-songkick-white.png');
+    background-position: right 10px center;
+    background-repeat: no-repeat;
+    -webkit-background-size: 50px;
+    background-size: 75px;
+}
+
+.events__list-item {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin: 0;
+    padding: 10px;
+    border-bottom: 1px solid gray;
+}
+
+.events__list-item:nth-child(1) {
+    border-top: 1px solid gray;
+}
+
+.events__list-item__date {
+    text-transform: uppercase;
+    font-size: .875em;
+}
+
+.events__list-item__details {
+    width: 100%;
+}
+
+.events__list-item__venue,
+.events__list-item__city {
+    display: inline-block;
+    width: 48%;
+}
+
+.events__list-item__btn-info__wrapper {
+    width: 33%;
+    min-width: 150px;
+    text-align: right;
+}
+
+.events__list-item__btn-info {
+    display: inline-block;
+    text-decoration: none;
+    color: white;
+    margin: 0;
+    padding: 4px 35px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    -webkit-transition: background-color .2s;
+    -moz-transition: background-color .2s;
+    -ms-transition: background-color .2s;
+    -o-transition: background-color .2s;
+    transition: background-color .2s;
+}
+
+.events__list-item__btn-info:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+}
