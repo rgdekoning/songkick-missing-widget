@@ -4,8 +4,8 @@
   "description": "A widget for fetching Songkick past events, because Songkick only provides a widget for upcoming events, but not for past events.",
   "main": "index.html",
   "scripts": {
-    "start": "parcel past-events.html --open",
-    "build": "parcel build past-events.html --public-url ./",
+    "start": "parcel ./src/past-events.html --open",
+    "build": "parcel build ./src/past-events.html --public-url ./",
     "eslint": "./node_modules/.bin/eslint ./src/js"
   },
   "devDependencies": {
