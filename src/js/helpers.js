@@ -1,19 +1,39 @@
 const fetchSkEvents = async (url) => {
-  const data = await fetch(url).then((response) => response.json());
+  const response = await fetch(url);
+  if (!response.ok) {
+    throw Error(response.statusText);
+  }
+
+  const data = await response.json();
 
   return data.resultsPage.results.event;
 };
 
-const buildSkUrlByQuerystring = (urlParams) => {
-  const artistId = urlParams.get('artistId');
-  const apiKey = urlParams.get('apiKey');
-  const page = urlParams.get('page') || 1;
-  const perPage = urlParams.get('per_page') || 50;
-  const orderBy = urlParams.get('order') || 'asc';
+const getSkParamsFromQuerystring = () => {
+  const params = new URLSearchParams(window.location.search);
+
+  return {
+    artistId: params.get('artistId'),
+    apiKey: params.get('apiKey'),
+    page: params.get('page') || 1,
+    perPage: params.get('per_page') || 50,
+    orderBy: params.get('order') || 'asc',
+  };
+};
+
+const buildSkUrl = (params) => {
+  const {
+    artistId, apiKey, page, perPage, orderBy,
+  } = params;
 
   return `https://api.songkick.com/api/3.0/artists/${artistId}/gigography.json?apikey=${apiKey}&order=${orderBy}&page=${page}&per_page=${perPage}`;
 };
 
-const fetchSkEventsByQuerystring = (urlParams) => fetchSkEvents(buildSkUrlByQuerystring(urlParams));
+const buildSkUrlByQuerystring = () => buildSkUrl(getSkParamsFromQuerystring());
 
-export default { fetchSkEvents, buildSkUrlByQuerystring, fetchSkEventsByQuerystring };
+const fetchSkEventsByQuerystring = () => fetchSkEvents(buildSkUrlByQuerystring());
+
+export default {
+  getSkParamsFromQuerystring,
+  fetchSkEventsByQuerystring,
+};
