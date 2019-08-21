@@ -1,0 +1,30 @@
+{
+  "name": "songkick-widget-past-events",
+  "version": "1.0.0",
+  "description": "A widget for fetching Songkick past events, because Songkick only provides a widget for upcoming events, but not for past events.",
+  "main": "index.html",
+  "scripts": {
+    "start": "parcel ./src/past-events.html --open",
+    "build": "parcel build ./src/past-events.html --public-url ./",
+    "eslint": "./node_modules/.bin/eslint ./src/js"
+  },
+  "devDependencies": {
+    "babel-core": "^6.26.3",
+    "eslint": "6.1.0",
+    "eslint-config-airbnb": "18.0.1",
+    "eslint-plugin-import": "^2.18.2",
+    "eslint-plugin-jsx-a11y": "^6.2.3",
+    "eslint-plugin-react": "^7.14.3",
+    "eslint-plugin-react-hooks": "^1.7.0",
+    "parcel-bundler": "^1.12.3"
+  },
+  "dependencies": {
+    "babel-polyfill": "^6.26.0",
+    "babel-preset-env": "^1.7.0",
+    "babel-preset-react": "^6.24.1",
+    "moment": "^2.24.0",
+    "prop-types": "^15.7.2",
+    "react": "^16.9.0",
+    "react-dom": "^16.9.0"
+  }
+}
