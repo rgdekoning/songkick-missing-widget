@@ -1,6 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import PastEventsListItem from './PastEventsListItem';
+import helpers from '../helpers';
+
+const { fetchSkEventsByQuerystring: fetchEvents } = helpers;
 
 class PastEventsList extends React.Component {
   constructor(props) {
@@ -8,38 +11,55 @@ class PastEventsList extends React.Component {
     this.state = {
       title: props.title,
       events: [],
+      fetched: false,
     };
   }
 
-  componentDidMount() {
-    const { events } = this.props;
-    events.then((listItems) => {
-      this.setState({ events: listItems });
-    });
+  async componentDidMount() {
+    const { skParams } = this.props;
+
+    try {
+      const events = await fetchEvents(skParams);
+      this.setState({ events, fetched: true });
+    } catch (error) {
+      this.setState({ fetched: false });
+    }
+  }
+
+  pastEventsListItems() {
+    const { events, fetched } = this.state;
+
+    if (!events || !fetched) {
+      return (
+        <div className="events__list-item">list empty</div>
+      );
+    }
+
+    return events.map((event) => {
+      const {
+        id, start, venue, location, uri,
+      } = event;
+
+      return (
+        <PastEventsListItem
+          start={start}
+          venue={venue}
+          location={location}
+          uri={uri}
+          key={id}
+        />
+      );
+    })
   }
 
   render() {
-    const { title, events } = this.state;
+    const { title } = this.state;
 
     return (
       <div className="events__container">
         <h2 className="events__title">{title}</h2>
         <div className="events__list__containers">
-          { events.map((listItem) => {
-            const {
-              id, start, venue, location, uri,
-            } = listItem;
-
-            return (
-              <PastEventsListItem
-                start={start}
-                venue={venue}
-                location={location}
-                uri={uri}
-                key={id}
-              />
-            );
-          }) }
+          { this.pastEventsListItems() }
         </div>
       </div>
     );
@@ -47,8 +67,11 @@ class PastEventsList extends React.Component {
 }
 
 PastEventsList.propTypes = {
-  title: PropTypes.string.isRequired,
-  events: PropTypes.object.isRequired,
+  title: PropTypes.string,
+};
+
+PastEventsList.defaultProps = {
+  title: 'Gespeelde data',
 };
 
 export default PastEventsList;
