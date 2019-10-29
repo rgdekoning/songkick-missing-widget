@@ -1,5 +1,10 @@
 # SONGKICK MISSING WIDGET
-Had a play with the songkick API to display past events.
+Songkick provides an easy way to display upcoming events (see: https://widget.songkick.com/USER_ID/songkick-widget.html), but not for past events (there is an API endpoint).
+
+The goal was to build a past events widget in a similar way using the past-events endpoint of songkick.
+see: https://www.songkick.com/developer
+
+Had a play with the songkick API and React to display past events.
 
 To use you need your songkick API key and your songkick artist ID.
 
